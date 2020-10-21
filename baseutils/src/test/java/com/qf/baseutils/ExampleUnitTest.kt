@@ -1,4 +1,4 @@
-package com.qf.baseutil
+package com.qf.baseutils
 
 import org.junit.Test
 

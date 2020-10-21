@@ -1,7 +1,7 @@
-package com.qf.baseutil.log
+package com.qf.baseutils.log
 
 import android.util.Log
-import com.qf.baseutil.BaseUtils
+import com.qf.baseutils.BaseUtils
 
 
 /**
