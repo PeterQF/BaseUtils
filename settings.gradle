@@ -1,0 +1,3 @@
+include ':baseutil'
+include ':app'
+rootProject.name = "MyModule"
