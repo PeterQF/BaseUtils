@@ -1,18 +1,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 
-publish {
-    userOrg = 'qf' // bintray账户下某个组织id
-    groupId = 'com.qf.baseutils' // maven仓库下库的包名，一般为模块包名
-    repoName = 'BaseUtils' // 仓库名，如果不指定默认是Maven，所以创建仓库时，仓库名不一定是Maven，可以自定义
-    artifactId = 'BaseUtils' // 项目名称
-    publishVersion = '1.0.0' // 版本号
-    desc = 'base util for android' // 项目介绍，可以不写
-    website = '' // 项目主页，可以不写
-}
+//publish {
+//    userOrg = 'qf' // bintray账户下某个组织id
+//    groupId = 'com.qf.baseutils' // maven仓库下库的包名，一般为模块包名
+//    repoName = 'BaseUtils' // 仓库名，如果不指定默认是Maven，所以创建仓库时，仓库名不一定是Maven，可以自定义
+//    artifactId = 'BaseUtils' // 项目名称
+//    publishVersion = '1.0.0' // 版本号
+//    desc = 'base util for android' // 项目介绍，可以不写
+//    website = '' // 项目主页，可以不写
+//}
 
 android {
     compileSdkVersion 29
