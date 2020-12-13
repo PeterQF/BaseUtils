@@ -31,6 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 publish {
@@ -38,7 +42,7 @@ publish {
     groupId = 'com.qf.baselibrary' // maven仓库下库的包名，一般为模块包名
     repoName = 'BaseMvvm' // 仓库名，如果不指定默认是Maven，所以创建仓库时，仓库名不一定是Maven，可以自定义
     artifactId = 'base-mvvm' // 项目名称（添加包时指定的名字）
-    publishVersion = '1.0' // 版本号
+    publishVersion = '1.2' // 版本号
     desc = 'base library for android' // 项目介绍，可以不写
     website = '' // 项目主页，可以不写
 }

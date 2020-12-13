@@ -4,11 +4,14 @@ import android.app.Activity
 import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.qf.baselibrary.base.application.BaseApplication
 import com.qf.baselibrary.utils.BarUtils
+import java.lang.reflect.ParameterizedType
 
 
 /**
@@ -16,18 +19,31 @@ import com.qf.baselibrary.utils.BarUtils
  * 时间：2020/12/5
  * 描述：BaseActivity
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     private var mActivityProvider: ViewModelProvider? = null
     private var mApplicationProvider: ViewModelProvider? = null
+    @Suppress("UNCHECKED_CAST")
+    protected val binding: VB by lazy {
+        // 使用反射得到viewBinding的class
+        // 返回当前类的父类type，也就是BaseActivity
+        val type = javaClass.genericSuperclass as ParameterizedType
+        // 获得泛型中的实际类型，可能会存在多个泛型，[0]也就是VB的type
+        val aClass = type.actualTypeArguments[0] as Class<*>
+        // 反射"inflate"
+        val method = aClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+        // 方法调用
+        method.invoke(null, layoutInflater) as VB
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        setContentView(binding.root)
         initStatusBar()
         initViewModel()
-        observe()
         init(savedInstanceState)
+        observe()
     }
 
     /**
@@ -68,7 +84,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun checkApplication(activity: Activity): Application {
-        return activity.getApplication()
+        return activity.application
             ?: throw IllegalStateException(
                 "Your activity/fragment is not yet attached to "
                         + "Application. You can't request ViewModel before onCreate call."
@@ -76,6 +92,4 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun init(savedInstanceState: Bundle?)
-
-    abstract fun getLayoutId(): Int
 }
